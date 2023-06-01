@@ -11,8 +11,4 @@ class Order extends Model
 
     protected $fillable = ['sender_address', 'user_id', 'receiver_address'];
 
-//    public function lists()
-//    {
-//        return $this->hasMany(Order)
-//    }
 }

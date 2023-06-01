@@ -23,4 +23,6 @@ Route::middleware('throttle:10,1')->group(function () {
     Route::apiResources([
         'orders' => OrderController::class,
     ]);
+    Route::get('calculate', [OrderController::class, 'calculate']);
 });
+

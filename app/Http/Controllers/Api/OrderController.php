@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeliveryRequest;
 use App\Http\Requests\OrderRequest;
+use App\Http\Resources\DeliveryResource;
 use App\Http\Resources\OrderResource;
+use App\Models\Delivery;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -51,25 +54,16 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function calculate(Request $request)
+    {
+        $order = new Delivery();
+
+        $order->sender_address = $request->sender_address;
+        $order->receiver_address = $request->receiver_address;
+        $order->order_id = $request->order_id;
+        $order->price = mt_rand(100, 10000);
+
+        return new DeliveryResource($order);
+    }
 }
-
-
-// Создание объектов моделей
-//        $customer = new User($userName, $userEmail);
-//        $order = new Order();
-//        $order->senderAddress = $senderAddress->input('senderAddress');
-//        $order->receiverAddress = $receiverAddress->input('receiverAddress');
-//        $order->userId = $userId->input('userId');
-
-//        $order->senderAddress = 'senderAddress';
-//        $order->receiverAddress = 'receiverAddress';
-//        $order->userId = 1;
-// Сохранение заказа в базе данных
-//        error_log($order);
-//        $order->save();
-//        error_log($order);
-//        // Возвращаем созданный заказ
-//        return response()->json([
-//            'message' => 'Запись успешно создана',
-//            'record' => $order
-//        ]);
