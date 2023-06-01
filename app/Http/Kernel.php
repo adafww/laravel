@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
     ];
 
     protected $routeMiddleware = [
-
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'rate_limit' => \App\Http\Middleware\RateLimitMiddleware::class,
     ];
 }

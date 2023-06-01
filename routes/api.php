@@ -19,18 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::group(['middleware' => 'rate_limit'], function () {
-//    Route::apiResources([
-//        'orders' => OrderController::class,
-//    ]);
-//});
-
-Route::apiResources([
-    'orders' => OrderController::class,
-]);
-//Route::post('/orders', [OrderController::class, 'createOrder']);
-
-//Route::get('/orders', [OrderController::class, 'getOrderList']);
-//
-//Route::get('/orders/{id}', [OrderController::class, 'getOrderInfo']);
-
+Route::middleware('throttle:10,1')->group(function () {
+    Route::apiResources([
+        'orders' => OrderController::class,
+    ]);
+});
